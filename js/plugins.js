@@ -12,5 +12,6 @@ var $plugins =
 {"name":"MOG_CharacterMotion","status":true,"description":"(v1.0) Sistema de animações dos sprites dos personagens.","parameters":{}},
 {"name":"MOG_CharParticles","status":true,"description":"(v1.0) Adiciona o sistema de partículas nos characters.","parameters":{}},
 {"name":"MOG_CharShatterEffect","status":true,"description":"(v1.0) Cria o efeito de shatter nos sprites dos characters.","parameters":{}},
-{"name":"MOG_TreasurePopup","status":true,"description":"(v1.0) Apresenta o ícone e o nome do tesouro ganho.","parameters":{"Duration":"15","Fade Speed":"5","X - Axis":"0","Y - Axis":"-32","Random Movement":"false","X Speed":"0","Y Speed":"1","Font Size":"16","Icon Scale":"0.60","Treasure Space Y-Axis":"20","Zoom Effect":"false","Gold Popup":"true","Gold Icon Index":"163"}}
+{"name":"MOG_TreasurePopup","status":true,"description":"(v1.0) Apresenta o ícone e o nome do tesouro ganho.","parameters":{"Duration":"15","Fade Speed":"5","X - Axis":"0","Y - Axis":"-32","Random Movement":"false","X Speed":"0","Y Speed":"1","Font Size":"16","Icon Scale":"0.60","Treasure Space Y-Axis":"20","Zoom Effect":"false","Gold Popup":"true","Gold Icon Index":"163"}},
+{"name":"CC_AutoSaveControl","status":true,"description":"Remove manual load and save menus.","parameters":{"autoLoad":"false","autoSaveOnly":"false","autoSaveOnBattleEnd":"true","autoSaveOnMapChange":"true","commonEventOnAutoSave":"0","commonEventOnAutoSaveError":"0"}}
 ];
