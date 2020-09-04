@@ -210,7 +210,7 @@ _.confirm = 0.05;
 _.close = 0.1;
 
 _.loadImage = function(filename, hue) {
-	return ImageManager.loadBitmap('img/SumRndmDde/title/', filename + '_[' + ConfigManager.getLanguage() + ']', hue, true);
+	return ImageManager.loadBitmap('img/SumRndmDde/title/', filename, hue, true);
 };
 
 _.setup = function() {
