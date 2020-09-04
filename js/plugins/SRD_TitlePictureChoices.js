@@ -210,7 +210,15 @@ _.confirm = 0.05;
 _.close = 0.1;
 
 _.loadImage = function(filename, hue) {
-	return ImageManager.loadBitmap('img/SumRndmDde/title/', filename + '_[' + ConfigManager.getLanguage() + ']', hue, true);
+	if(!ConfigManager.isDefaultLanguage() && filename.match(/_\[Original\]$/)) {
+		var lang = ConfigManager.getLanguage();
+		var name = filename.slice(0, -11) + '_[' + lang + ']';
+		try {
+			return ImageManager_loadBitmap.call(this, 'img/SumRndmDde/title/', name, hue, true);
+		} catch(e) {
+			return ImageManager_loadBitmap.apply(this, arguments);
+		}
+	}
 };
 
 _.setup = function() {
