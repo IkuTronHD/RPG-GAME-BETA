@@ -1764,7 +1764,7 @@ Window_Options.prototype.statusText = function(index) {
 };
 
 Window_Options.prototype.languageStatusText = function(value) {
-	return value === 0 ? 'Español (Castellano)' : $.languages[value - 1];
+	return value === 0 ? 'Español' : $.languages[value - 1];
 };
 
 Window_Options.prototype.incrementLanguage = function(value, symbol) {
