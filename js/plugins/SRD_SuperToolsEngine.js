@@ -181,15 +181,15 @@ function WindowManager() {
 }
 
 // Fix the flag check for 1.6 editor and 1.5 or below project
-//if(process.versions['node-webkit'] >= "0.13.0" && Utils.RPGMAKER_VERSION < "1.6.0") {
+if(process.versions['node-webkit'] >= "0.13.0" && Utils.RPGMAKER_VERSION < "1.6.0") {
 
-//Utils.isOptionValid = function(name) {
-//	if (location.search.slice(1).split('&').contains(name)) {return 1;};
-//	if (typeof nw !== "undefined" && nw.App.argv.length > 0 && nw.App.argv[0].split('&').contains(name)) {return 1;};
-//	return 0;
-//};
+Utils.isOptionValid = function(name) {
+	if (location.search.slice(1).split('&').contains(name)) {return 1;};
+	if (typeof nw !== "undefined" && nw.App.argv.length > 0 && nw.App.argv[0].split('&').contains(name)) {return 1;};
+	return 0;
+};
 
-//}
+}
 
 (function(_) {
 
@@ -214,8 +214,7 @@ _.open = String(params['Auto Open Window']).trim().toLowerCase() === 'true';
 _.banList = JSON.parse(params['Menu Editor Exempt List']);
 
 _.isPlaytest = Utils.isOptionValid('test') && Utils.isNwjs();
-//_.isNewNWjs = process.versions['node-webkit'] >= "0.13.0";
-_.isNewNWjs = true; //process.versions['node-webkit'] >= "0.13.0";
+_.isNewNWjs = process.versions['node-webkit'] >= "0.13.0";
 
 if(_.isPlaytest && _.isNewNWjs) {
 	if(!require('fs').existsSync("supertoolsengine.html")) require('fs').writeFileSync("supertoolsengine.html", "<!DOCTYPE html><html><head><title></title></head><body></body></html>");
