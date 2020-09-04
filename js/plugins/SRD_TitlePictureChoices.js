@@ -210,7 +210,7 @@ _.confirm = 0.05;
 _.close = 0.1;
 
 _.loadImage = function(filename, hue) {
-	if(!ConfigManager.isDefaultLanguage() && filename.match(/_\[Original\]$/)) {
+	if(!ConfigManager.isDefaultLanguage() {
 		var lang = ConfigManager.getLanguage();
 		var name = filename.slice(0, -11) + '_[' + lang + ']';
 		try {
