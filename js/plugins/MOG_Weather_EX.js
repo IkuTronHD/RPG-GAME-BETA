@@ -3,201 +3,17 @@
 //=============================================================================
 
 /*:
- * @target MZ
- * @plugindesc (v1.2) Adiciona novos efeitos de climas.
+ * @plugindesc (v3.4 *) Adiciona novos efeitos de climas.
  * @author Moghunter
- * @url https://atelierrgss.wordpress.com 
  *
  * @param Battle Weather
  * @desc Ativar o clima na batalha.
  * @default true
  * @type boolean
  *
- * @command weatherEX
- * @desc Configuração do clima.
- * @text Set Weather Effect
- *
- * @arg id
- * @desc Definição da Index (0..20)
- * @text Index
- * @default 0 
- * @type number
- * @min 0
- * @max 20
- * 
- * @arg mode
- * @desc Definição do tipo de clima. 
- * @text Weather
- * @type select 
- * @default Wind 1
- * @option Wind 1 (Falling)
- * @value Wind 1
- * @option Wind 2 (Left Side)
- * @value Wind 2
- * @option Wind 3 (Zoom)
- * @value Wind 3
- * @option Spark 1
- * @value Spark 1
- * @option Spark 2 (Magical Field)
- * @value Spark 2
- * @option Spark 3 (FireFly)
- * @value Spark 3
- * @option Spark 4 (Magic Field 2)
- * @value Spark 4 
- * @option Fire 1 (Two Sides)
- * @value Fire 1
- * @option Fire 2 (One Side)
- * @value Fire 2
- * @option Fire 3 (Explosion)
- * @value Fire 3
- * @option Snow 1
- * @value Snow 1
- * @option Snow 2 (Storm)
- * @value Snow 2
- * @option Snow 3 (Freezing)
- * @value Snow 3
- * @option Rain 1
- * @value Rain 1
- * @option Rain 2  (Splashing)
- * @value Rain 2
- * @option Rain 3  (Zoom) (Freezing)
- * @value Rain 3
- * @option Cloud 1 (Fog Effect)
- * @value Cloud 1
- * @option Cloud 2 (Frontal Zoom)
- * @value Cloud 2
- * @option Cloud 3 (Strong)
- * @value Cloud 3
- * @option Random 1
- * @value Random 1
- * @option Random 2 (Zoom)
- * @value Random 2
- * @option Random 3 (Cosmo)
- * @value Random 3
- * @option Sunshine
- * @value Sunshine
- * @option Fog
- * @value Fog
- * @option Steam
- * @value Steam
- * @option LightSpeed
- * @value LightSpeed
- * @option Shooting Star 1
- * @value Shooting Star 1
- * @option Shooting Star 2 (Rotation)
- * @value Shooting Star 2
- * @option Shinning
- * @value Shinning
- * @option Bouncing
- * @value Bouncing
- * @option Bubbles
- * @value Bubbles
- * @option StandStill
- * @value StandStill
- * @option Fog XP Style (Horizontal scrolling)
- * @value Fog XP Style Horz
- * @option Fog XP Style (Vertical scrolling)
- * @value Fog XP Style Vert
- * @option Overlay 1 (Loop)
- * @value Overlay 1
- * @option Overlay 2
- * @value Overlay 2
- *
- * @arg power
- * @desc Definição da quantidade partículas.
- * (0 to 2000)  
- * @text Number of Particles
- * @type number
- * @default 30 
- * @type number
- * @min 1
- * @max 2000
- *  
- * @arg z
- * @desc Prioridade do clima.
- * @text Layer (Z-index)
- * @type select
- * @default Normal
- * @option Below (Below of tileset)
- * @value Below
- * @option Normal
- * @value Normal
- * 
- * @arg blendType
- * @desc Definição do blend.
- * @text Blend Type
- * @type select
- * @default Normal
- * @option Additive
- * @value Additive
- * @option Normal
- * @value Normal
- * @option Multiply
- * @value Multiply
- * 
- * @arg fileName
- * @desc Definição do nome da imagem.
- * @text File Name
- * @default Leaf_01A
- * @type file
- * @dir img/weather/
- *
- * @arg speed
- * @desc Definição da velocidade do clima.
- * (20% -> 800%)
- * @text Speed (%)
- * @type number
- * @min 20
- * @max 1000
- * @default 100
- *
- * @arg scale
- * @desc Definição do tamanho da partícula.
- * (20% -> 800%)
- * @text Zoom (%)
- * @type number
- * @min 20
- * @max 800
- * @default 100
- *
- *
- * @command weatherEXRemove
- * @desc Remover o clima.
- * @text Remove
- *
- * @arg id
- * @desc Remove o clima (0..20)
- * @text Index
- * @default 0
- * @type number
- * @min 0
- * @max 20 
- *
- *
- * @command weatherEXRemoveAll
- * @desc Remove todos os climas.
- * @text Remove All
- * @default 
- *
- *
- * @command weatherEXBattle
- * @desc Ativar ou desativar o clima de batalha.
- * @text Battle Weather
- *
- * @arg enable
- * @desc Ativar o clima na batalha
- * @text Weather in Battle
- * @type boolean 
- * @default true
- *
- * @param
- *
- *
-/
- * 
  * @help  
  * =============================================================================
- * +++ MOG - Weather EX (v1.2) +++
+ * +++ MOG - Weather EX (v3.4) +++
  * By Moghunter 
  * https://atelierrgss.wordpress.com/
  * =============================================================================
@@ -205,7 +21,7 @@
  * As imagens do clima devem ser gravadas na pasta. (img/weather/)
  *
  * =============================================================================
- * - MAP NOTETAGS
+ * - PLUGIN COMMANDS    /    MAP NOTETAGS
  * =============================================================================
  * Para ativar o clima use o comentário abaixo através da função PLUGIN COMMAND
  *
@@ -263,30 +79,77 @@
  *
  * -------------------------------------
  * EG
- *         weather : 0 : 0 : 40 : 100 : 0 : Leaf_02B
+ *         weather : 0 : 0 : 40 : 1 : 0 : Leaf_02B
  * -------------------------------------
  *
  * =============================================================================
  * - OFFSET  COMMANDS
  * =============================================================================
- * weather : ID : TYPE : POWER : SPEED :  BLEND_TYPE : FILE_NAME : Z-INDEX : ZOOM
+ * weather : ID : TYPE : POWER : SPEED :  BLEND_TYPE : FILE_NAME : Z-INDEX : ZOOM : FRAMES : ANIMATION_SPEED
  * 
  * -> Z-INDEX        - Define se o clima ficará acima ou abaixo do tileset.
  *                         0 - Abaixo do Tileset.
  *                         1 - Acima do Tileset.
+ *          		       2 - Acima das Imagens (Pictures)
  *      
  * -> ZOOM           - Aumenta ou diminue o tamanho da imagem. (0% - 800%)   
  *
+ * -> FRAMES         - Ativa animação das partículas. Defina a quantidade de frames da imagem.
+ *    
+ * -> ANIMATION_SPEED    - Define a velocidade da animação.
+ *
  * -------------------------------------
  * EG
- *         weather : 0 : 0 : 40 : 100 : Leaf_02B : 1 : 5 : 0.50 : 0.20
+ *         weather : 0 : 0 : 40 : 1 : Leaf_02B : 1 : 5 : 0.50 : 0.20 : 4 : 20
  * -------------------------------------
  * 
- * ============================================================================= 
- * * HISTÓRICO
+ *
+ *
  * =============================================================================
- * v1.2 - Melhoria no Plugin Command na seleção do arquivo de imagem.
- * v1.1 - Correção de compatibilidade com o plugin ButtonPicture.
+ * - REMOVER CLIMA
+ * =============================================================================
+ * Para remover o clima use o plugin command abaixo.
+ *
+ *      clear_weather : WEATHER_INDEX
+ *
+ * Para remover todos os climas use o plugin command abaixo.
+ *
+ *      clear_all_weathers
+ *
+ * Para desativar o clima na batalha use o plugin command abaixo.
+ *
+ *      battle_weather : false
+ *
+ * ============================================================================
+ * - WHAT'S  NEW
+ * ============================================================================
+ * - (version 3.4) -
+ *   (BUG FIX) – Correção da posição das partículas ao mudar de mapa.
+ *
+ * - (version 3.3) -
+ *   (BUG FIX) - Correção de não dar refresh nos climas 6,17 e 20,
+ *  
+ * - (version 3.2) -
+ *   (BUG FIX) - Corrigido o Bug no efeito Fog XP Style com o plugin
+ *           MOG_BattleCameraFrontal 
+ *
+ * - (version 3.1) -
+ *   (NEW) - Adicionado o efeito de neblina estilo Rpg Maker XP. (4 Efeitos)
+ *   (UPD) - Removido o limite de quantidade de partículas. (Benchmark test)
+ *   (BUG FIX) - Correção do crash relativo aos Notetags dos Mapas.
+ *   (BUG FIX) - Correção na compatibilidade com o Battle Camera plugin.  
+ *
+ * - (version 3.0) -
+ *   (NEW) - Possibilidade de utilizar multiplos climas (max 10).
+ *   (NEW) - Adicionado 9 novos efeitos.
+ *   (NEW) - Partículas animadas (Frames).
+ *   (NEW) - Possibilidade de definir a prioridade de visibilidade do clima.
+ *   (NEW) - Novas opções de customização do clima (Velocidade,Zoom)
+ *   (NEW) - Plugin Command para ativar ou desativar os climas na batalha.
+ *   (NEW) - Possibilidade de ativar os climas usando NOTETAGS do map.
+ *   (UPD) - Melhoria na posição das partículas em tela em movimento.
+ *   (BUG FIX) - Correção na posição inicial das particulas em alguns tipos
+ *               de climas.
  *
  */
 
@@ -304,30 +167,10 @@
 	Moghunter.weatherEX_layer1  = Number(Moghunter.parameters['Layer 1 - Z-Index'] || 0);
 	Moghunter.weatherEX_layer2  = Number(Moghunter.parameters['Layer 2 - Z-Index'] || 50);
 	Moghunter.weatherEX_layer3  = Number(Moghunter.parameters['Layer 3 - Z-Index'] || 110);
-
-
-//=============================================================================
-// ■■■  PluginManager ■■■ 
-//=============================================================================	
 	
-PluginManager.registerCommand('MOG_Weather_EX', "weatherEX", data => {
-	$gameSystem.weatherEXPluginCom(data);
-});
-
-PluginManager.registerCommand('MOG_Weather_EX', "weatherEXRemove", data => {
-	$gameSystem.weatherEXPluginComRemove(data);
-});	
-	
-PluginManager.registerCommand('MOG_Weather_EX', "weatherEXRemoveAll", data => {
-	$gameSystem.weatherEXPluginComRemoveAll();
-});
-
-PluginManager.registerCommand('MOG_Weather_EX', "weatherEXBattle", data => {
-	$gameSystem.weatherEXPluginComBattle(data);
-});		
 	
 //=============================================================================
-// ■■■ ImageManager ■■■ 
+// ** ImageManager
 //=============================================================================
 
 //==============================
@@ -338,18 +181,17 @@ ImageManager.loadWeather = function(filename) {
 };			
 	
 //=============================================================================
-// ■■■ Game System ■■■
+// ** Game System
 //=============================================================================
 
 //==============================
-// ♦ ALIAS ♦  Initialize
+// * Initialize
 //==============================
 var _mog_weatherEX_system_initialize = Game_System.prototype.initialize;
 Game_System.prototype.initialize = function() {
 	_mog_weatherEX_system_initialize.call(this);
 	this._weatherEXScnBat = String(Moghunter.weatherEX_battle) === "true" ? true : false;
 	this._weatherEX_MapId = -1;
-	this._weatherSkipReLoad = false;
 	this.weatherEX_initialize(false);
 };
 
@@ -384,28 +226,6 @@ Game_System.prototype.clearWeatherEX = function(id,needrefresh) {
 };
 
 //==============================
-// * weather EXPluginComRemove
-//==============================
-Game_System.prototype.weatherEXPluginComRemove = function(data) {
-    var idReal =  Math.min(Math.max(Number(data.id), 0),$gameSystem._weatherEX_Data.length - 1);
-    this.clearWeatherEX(idReal);
-};
-
-//==============================
-// * weather EXPluginComRemove All
-//==============================
-Game_System.prototype.weatherEXPluginComRemoveAll = function() {
-     $gameSystem.weatherEX_initialize(true)
-};
-
-//==============================
-// * weather EXPluginComBattle
-//==============================
-Game_System.prototype.weatherEXPluginComBattle = function(data) {
-	$gameSystem._weatherEXScnBat = String(data.enable) == "true" ? true : false;
-};
-
-//==============================
 // * Command Setup Weather
 //==============================
 Game_System.prototype.commandSetupWeather = function(args) {
@@ -418,7 +238,8 @@ Game_System.prototype.commandSetupWeather = function(args) {
 	var z = args[13] != null ? Number(args[13]) : 1;
 	var scale = args[15] != null ? Number(args[15]) : 100;
 	var frame = args[17] != null ? Number(args[17]) : 1;
-	var frameSpeed = args[19] != null ? Number(args[19]) : 10;	
+	var frameSpeed = args[19] != null ? Number(args[19]) : 10;
+	
     var id_Real =  Math.min(Math.max(id, 0),$gameSystem._weatherEX_Data.length - 1);
 	var mode_Real = Math.min(Math.max(mode, 0),35);
 	var power_Real = Math.max(power, 1);
@@ -426,6 +247,9 @@ Game_System.prototype.commandSetupWeather = function(args) {
 	var blendType_Real = Math.min(Math.max(blendType, 0),2);
 	var scale_Real = Math.min(Math.max(scale, 0),800);
 	var speed_Real = Math.min(Math.max(speed, 0),1000);
+	var frame_Real = Math.min(Math.max(frame, 1),100);
+	var frame_Speed = Math.min(Math.max(frameSpeed, 0),1000);
+	
 	this._weatherEX_Data[id_Real].mode = mode_Real;
 	this._weatherEX_Data[id_Real].power = power_Real;
 	this._weatherEX_Data[id_Real].z = z_Real;
@@ -433,122 +257,10 @@ Game_System.prototype.commandSetupWeather = function(args) {
 	this._weatherEX_Data[id_Real].fileName = fileName;
 	this._weatherEX_Data[id_Real].speed = speed_Real;
 	this._weatherEX_Data[id_Real].scale = scale_Real;
-	this._weatherEX_Data[id_Real].frames = 1;
-	this._weatherEX_Data[id_Real].frameSpeed = 4;
+	this._weatherEX_Data[id_Real].frames = frame_Real;
+	this._weatherEX_Data[id_Real].frameSpeed = frame_Speed;
 	this._weatherEX_Data[id_Real].needRefresh = true;
 	this._needRefreshWeatherEX = true;
-};
-
-//==============================
-// * weather EX Plugin Com
-//==============================
-Game_System.prototype.weatherEXPluginCom = function(data) {
-    var id_Real =  Math.min(Math.max(Number(data.id), 0),$gameSystem._weatherEX_Data.length - 1);
-    var mode = this.weatherGetMode(data.mode);
-	var mode_Real = Math.min(Math.max(mode, 0),35);
-	var power_Real = Math.min(Math.max(Number(data.power), 1),2000);
-	var fileName = String(data.fileName)
-	var zIndex = this.weatherGetZ(data.z);
-	var z_Real = Math.min(Math.max(zIndex, 0),2); 
-	var blend = this.weatherGetBlend(data.blendType);
-	var blendType_Real = Math.min(Math.max(blend, 0),2);
-	var scale_Real = Math.min(Math.max(Number(data.scale), 20),800);
-	var speed_Real = Math.min(Math.max(Number(data.speed), 20),1000);
-	this._weatherEX_Data[id_Real].mode = mode_Real;
-	this._weatherEX_Data[id_Real].power = power_Real;
-	this._weatherEX_Data[id_Real].z = z_Real;
-	this._weatherEX_Data[id_Real].blendMode = blendType_Real;
-	this._weatherEX_Data[id_Real].fileName = fileName;
-	this._weatherEX_Data[id_Real].speed = speed_Real;
-	this._weatherEX_Data[id_Real].scale = scale_Real;
-	this._weatherEX_Data[id_Real].frames = 1;
-	this._weatherEX_Data[id_Real].frameSpeed = 4;
-	this._weatherEX_Data[id_Real].needRefresh = true;
-	this._needRefreshWeatherEX = true;
-};
-
-//==============================
-// * weather get Mode
-//==============================
-Game_System.prototype.weatherGetMode = function(mode) {
-	if (mode == "Wind 1") {return 0
-    } else if (mode == "Wind 2") {return 1;
-	} else if (mode == "Wind 3") {return 2;
-	} else if (mode == "Spark 1") {return 3;
-	} else if (mode == "Spark 2") {return 4;
-	} else if (mode == "Spark 3") {return 5;
-	} else if (mode == "Spark 4") {return 29;
-	} else if (mode == "Fire 1") {return 6;
-	} else if (mode == "Fire 2") {return 7;
-	} else if (mode == "Fire 3") {return 8;
-	} else if (mode == "Snow 1") {return 9;
-	} else if (mode == "Snow 2") {return 10;
-	} else if (mode == "Snow 3") {return 11;	
-	} else if (mode == "Rain 1") {return 12;
-	} else if (mode == "Rain 2") {return 13;
-	} else if (mode == "Rain 3") {return 14;
-	} else if (mode == "Cloud 1") {return 15;
-	} else if (mode == "Cloud 2") {return 16;
-	} else if (mode == "Cloud 3") {return 17;
-	} else if (mode == "Random 1") {return 18;
-	} else if (mode == "Random 2") {return 19;
-	} else if (mode == "Random 3") {return 20;		
-	} else if (mode == "Sunshine") {return 21;
-	} else if (mode == "Fog") {return 22;
-	} else if (mode == "Steam") {return 23;		
-	} else if (mode == "LightSpeed") {return 24;
-	} else if (mode == "Shooting Star 1") {return 25;
-	} else if (mode == "Shooting Star 2") {return 26;	
-	} else if (mode == "Shinning") {return 27;
-	} else if (mode == "Bouncing") {return 28;
-	} else if (mode == "Bubbles") {return 30;	
-	} else if (mode == "StandStill") {return 31;
-	} else if (mode == "Fog XP Style Horz") {return 32;
-	} else if (mode == "Fog XP Style Vert") {return 33;	
-	} else if (mode == "Overlay 1") {return 34;
-	} else if (mode == "Overlay 2") {return 35;
-	};
-	return 0;
-};
-
-//==============================
-// * weather get Zindex
-//==============================
-Game_System.prototype.weatherGetZ = function(zindex) {
-	if (zindex == "Below") {return 0;
-	} else if (zindex == "Above") {return 2};
-	return 1;
-};
-
-//==============================
-// * weather get Blend
-//==============================
-Game_System.prototype.weatherGetBlend = function(blend) {
-	if (blend == "Additive") {return 1;
-	} else if (blend == "Multiply") {return 2};
-	return 0;
-}; 
-
-//==============================
-// * weather EX Sys
-//==============================
-Game_System.prototype.weatherEXSys = function(id,mode,power,z,blend,file,speed,scale,frames,fSpeed) {
-	var id_Real = Math.abs(id)
-	var speed2 = speed != null ? speed : 100;
-	var scale2 = scale != null ? scale : 100;
-	var frames2 = frames != null ? frames : 1;
-	var fSpeed2 = fSpeed != null ? fSpeed : 4;	
-	this._weatherEX_Data[id_Real].mode = mode;
-	this._weatherEX_Data[id_Real].power = power;
-	this._weatherEX_Data[id_Real].z = z;
-	this._weatherEX_Data[id_Real].blendMode = blend;
-	this._weatherEX_Data[id_Real].fileName = String(file);
-	this._weatherEX_Data[id_Real].speed = speed2;
-	this._weatherEX_Data[id_Real].scale = scale2;
-	this._weatherEX_Data[id_Real].frames = frames2;
-	this._weatherEX_Data[id_Real].frameSpeed = fSpeed2;
-	this._weatherEX_Data[id_Real].needRefresh = true;
-	this._needRefreshWeatherEX = true;	
 };
 
 //==============================
@@ -561,11 +273,45 @@ Game_System.prototype.weatherMode = function(id) {
 };
 
 //=============================================================================
-// ■■■ Game Map ■■■
+// ** Game_Interpreter
 //=============================================================================
 
 //==============================
-// ♦ ALIAS ♦  Setup
+// * Plugin Command
+//==============================
+var _mog_weatherEX_pluginCommand = Game_Interpreter.prototype.pluginCommand
+Game_Interpreter.prototype.pluginCommand = function(command, args) {
+	this.commandWeatherEX(command, args);
+	_mog_weatherEX_pluginCommand.call(this,command, args);
+	return true;
+};
+
+//==============================
+// * Command Weather EX
+//==============================
+Game_Interpreter.prototype.commandWeatherEX = function(command, args) {
+	if (command === "clear_weather") {$gameSystem.clearWeatherEX(Number(args[1]),true)};
+	if (command === "clear_all_weathers") {$gameSystem.weatherEX_initialize(true)}; 
+	if (command === "battle_weather") {this.commandBattleWeather(args)};
+    if (command === "weather" && args)  {$gameSystem.commandSetupWeather(args)};
+	return true;
+};
+
+//==============================
+// * Command Battle Weather
+//==============================
+Game_Interpreter.prototype.commandBattleWeather = function(args) {
+    var enable = args[1] != null ? String(args[1]) : true;
+	var enableReal = String(enable) === "true" ? true : false;
+	$gameSystem._weatherEXScnBat = enableReal;
+};
+
+//=============================================================================
+// ** Game Map
+//=============================================================================
+
+//==============================
+// * Setup
 //==============================
 var _mog_weatherEX_gmap_setup = Game_Map.prototype.setup;
 Game_Map.prototype.setup = function(mapId) {
@@ -599,11 +345,11 @@ Game_Map.prototype.setWeatherEX = function(nt) {
 };	
 
 //=============================================================================
-// ■■■ Spriteset Base ■■■
+// ** Spriteset Base
 //=============================================================================	
 
 //==============================
-// ♦ ALIAS ♦  initialize
+// * initialize
 //==============================
 var _mog_weatherEx_sprtBase = Spriteset_Base.prototype.initialize;
 Spriteset_Base.prototype.initialize = function() {
@@ -654,6 +400,7 @@ Spriteset_Base.prototype.createWeatherEX = function(id) {
 	this._weatherField_1.children.sort(function(a, b){return a.z-b.z});
 	this._weatherField_2.children.sort(function(a, b){return a.z-b.z});
 	this._weatherField_3.children.sort(function(a, b){return a.z-b.z});
+	
 };
 
 //==============================
@@ -690,7 +437,6 @@ Spriteset_Base.prototype.removeWeatherEXRefresh = function() {
            this._weatherField_1.removeChild(this._weatherEXSprites[i]);
     	   this._weatherField_2.removeChild(this._weatherEXSprites[i]);
    		   this._weatherEXSprites[i].clear();
-		   this._weatherEXSprites[i].destroy();
 	   	   this._weatherEXSprites[i] = null;
         };
 	};
@@ -731,15 +477,15 @@ Spriteset_Base.prototype.createWeatherField_3 = function(mode) {
 	this._weatherField_3 = new Sprite();
 	this._weatherField_3.z = Moghunter.weatherEX_layer3;
 	this._weatherField_3.mz = this._weatherField_3.z;
-	this._baseSprite.addChild(this._weatherField_3);
+	this._pictureContainer.addChild(this._weatherField_3);
 };
 
 //==============================
-// ♦ ALIAS ♦  createUpperLayer
+// * Create Pictures
 //==============================
-var _mog_weatherEX_sprtbase_createUpperLayer = Spriteset_Base.prototype.createUpperLayer;
-Spriteset_Base.prototype.createUpperLayer = function() {
-	_mog_weatherEX_sprtbase_createUpperLayer.call(this);
+var _mog_weatherEX_sprtbase_createPictures = Spriteset_Base.prototype.createPictures;
+Spriteset_Base.prototype.createPictures = function() {
+	_mog_weatherEX_sprtbase_createPictures.call(this);
 	this.createWeatherField_3();
 	if (this.canReloadWeatherEX()) {this.reloadWeatherEX();};
 };
@@ -753,7 +499,7 @@ Spriteset_Base.prototype.canReloadWeatherEX = function() {
 };
 
 //==============================
-// ♦ ALIAS ♦  Update
+// * Update
 //==============================
 var _mog_weatherEX_sprtbase_update = Spriteset_Base.prototype.update;
 Spriteset_Base.prototype.update = function() {
@@ -779,11 +525,11 @@ Spriteset_Base.prototype.refreshWeatherEX = function() {
 };
 
 //=============================================================================
-// ■■■ Spriteset Map ■■■
+// ** Spriteset Map
 //=============================================================================	
 
 //==============================
-// ♦ ALIAS ♦  create Parallax
+// * create Parallax
 //==============================
 var _mog_weatherEx_sprtMap_createParallax = Spriteset_Map.prototype.createParallax;
 Spriteset_Map.prototype.createParallax = function() {
@@ -792,7 +538,7 @@ Spriteset_Map.prototype.createParallax = function() {
 };
 
 //==============================
-// ♦ ALIAS ♦  create TileMap
+// * create TileMap
 //==============================
 var _mog_weatherEx_sprtMap_createTilemap = Spriteset_Map.prototype.createTilemap;
 Spriteset_Map.prototype.createTilemap = function() {
@@ -801,7 +547,7 @@ Spriteset_Map.prototype.createTilemap = function() {
 };
 
 //==============================
-// ♦ ALIAS ♦  create Lower Layer
+// * create Lower Layer
 //==============================
 var _mog_weatherEx_sprtMap_createLowerLayer = Spriteset_Map.prototype.createLowerLayer;
 Spriteset_Map.prototype.createLowerLayer = function() {
@@ -810,11 +556,11 @@ Spriteset_Map.prototype.createLowerLayer = function() {
 };
 
 //=============================================================================
-// ■■■ Spriteset Battle ■■■
+// ** Spriteset Battle
 //=============================================================================	
 
 //==============================
-// ♦ ALIAS ♦  create BattleBack
+// * create BattleBack
 //==============================
 var _mog_weatherEx_createBattleback = Spriteset_Battle.prototype.createBattleback;
 Spriteset_Battle.prototype.createBattleback = function() {
@@ -823,7 +569,7 @@ Spriteset_Battle.prototype.createBattleback = function() {
 };
 
 //==============================
-// ♦ ALIAS ♦  create Lower Layer
+// * create Lower Layer
 //==============================
 var _mog_weatherEx_sprtBat_createLowerLayer = Spriteset_Battle.prototype.createLowerLayer;
 Spriteset_Battle.prototype.createLowerLayer = function() {
@@ -832,11 +578,11 @@ Spriteset_Battle.prototype.createLowerLayer = function() {
 };
 
 //=============================================================================
-// ■■■ Scene Map ■■■
+// ** Scene Map
 //=============================================================================
 
 //==============================
-// ♦ ALIAS ♦ snap For BattleBackground
+// * snap For BattleBackground
 //==============================
 var _weather_ex_scMap_snapForBattleBackground = Scene_Map.prototype.snapForBattleBackground;
 Scene_Map.prototype.snapForBattleBackground = function() {
@@ -866,7 +612,7 @@ Scene_Map.prototype.enableWeatherEXField = function(enable) {
 };
 
 //==============================
-// ♦ ALIAS ♦  Terminate
+// * Terminate
 //==============================
 var _mog_weatherEX_scMap_terminate = Scene_Map.prototype.terminate;
 Scene_Map.prototype.terminate = function() {
@@ -875,20 +621,11 @@ Scene_Map.prototype.terminate = function() {
 };
 
 //=============================================================================
-// ■■■ Scene Battle ■■■
+// ** Scene Battle
 //=============================================================================
 
 //==============================
-// ♦ ALIAS ♦  Terminate
-//==============================
-var _mog_weatherEX_scBat_createSpriteset = Scene_Battle.prototype.createSpriteset;
-Scene_Battle.prototype.createSpriteset = function() {
-	_mog_weatherEX_scBat_createSpriteset.call(this);
-	$gameSystem._weatherSkipReLoad = true;
-};
-
-//==============================
-//  ♦ ALIAS ♦ Terminate
+// * Terminate
 //==============================
 var _mog_weather_ex_scBattle_terminate = Scene_Battle.prototype.terminate;
 Scene_Battle.prototype.terminate = function() {
@@ -897,7 +634,7 @@ Scene_Battle.prototype.terminate = function() {
 };
 
 //=============================================================================
-// ■■■ SpriteWeatherEX ■■■
+// * SpriteWeatherEX
 //=============================================================================
 function SpriteWeatherEX() {
     this.initialize.apply(this, arguments);
@@ -912,10 +649,10 @@ SpriteWeatherEX.prototype.constructor = SpriteWeatherEX;
 SpriteWeatherEX.prototype.initialize = function(id) {
 	Sprite.prototype.initialize.call(this);	
 	this._id = id;
-	this._cam = [0,0,false,0,0,0,0,0,0];
+	this._cam = [0,0,false,0,0];
 	this._modePosX = 0;
-	this._screenRX = Graphics.width;
-	this._screenRY = Graphics.height;
+	this._screenRX = Graphics.boxWidth;
+	this._screenRY = Graphics.boxHeight;
 	this._screenAn = Math.floor(this._screenRX / 13);
 	this._speed = 0;
 	this._imgChecked = false;
@@ -1013,7 +750,6 @@ SpriteWeatherEX.prototype.isAnimated = function() {
 SpriteWeatherEX.prototype.clear = function(id) {
     for (var i = 0; i < this._sprites.length; i++) {
 		this.removeChild(this._sprites[i])
-		this._sprites[i].destroy();
 	};
 };
 
@@ -1044,40 +780,46 @@ SpriteWeatherEX.prototype.isTilingWeather = function() {
 //==============================
 SpriteWeatherEX.prototype.createSprites = function() {
 	this._sprites = [];
-	var power = this.data().mode >= 32 ? 1 : this.data().power;
-    for (var i = 0; i < power; i++) {
+    for (var i = 0; i < this.data().power; i++) {
 		if (this.isTilingWeather()) {
 		    this._sprites[i] = new TilingSprite(this._image);
 			this._sprites[i].tiling = true;
 			this._sprites[i].needRefreshMove = false;
-		    this._sprites[i].move(0, 0,Graphics.width + 32,Graphics.height + 32);
-			this._sprites[i].x = -16 + (Graphics.width / 2);
-			this._sprites[i].y = -16 + (Graphics.height / 2);
+			if (Imported.MOG_BattleCameraFrontal && $gameParty.inBattle()) {
+				this.refreshTilingMove(this._sprites[i]);
+                this._sprites[i].refreshMove = false;
+		    } else {
+			    this._sprites[i].move(0, 0,Graphics.boxWidth + 32,Graphics.boxHeight + 32);
+			};
+			this._sprites[i].x = -16 + (Graphics.boxWidth / 2);
+			this._sprites[i].y = -16 + (Graphics.boxHeight / 2);
 		} else {
 		    this._sprites[i] = new Sprite(this._image)
 		};
 		this._sprites[i].z = i;
 		this.setupBase(this._sprites[i],i);
 		this.refreshWeather(this._sprites[i],true);
-		if (this.canLoadPreData(i)) {
-		    this.loadPreData(this._sprites[i],this.preData()[i])
+		if ($gameSystem._weatherEX_MapId == $gameMap._mapId) {
+		   if ($gameSystem._weatherSprites && this.preData() && this.preData()[i]) {this.loadPreData(this._sprites[i],this.preData()[i])}
 		};
 		this.addChild(this._sprites[i]);
 	};
-	$gameSystem._weatherSkipReLoad = false;
 };
 
-
 //==============================
-// * can load pre Data
+// * Refresh Tiling Move
 //==============================
-SpriteWeatherEX.prototype.canLoadPreData = function(i) {
-	if ($gameSystem._weatherEX_MapId != $gameMap._mapId) {return false};
-	if (!$gameSystem._weatherSprites) {return false};
-	if (!this.preData()) {return false};
-	if (!this.preData()[i]) {return false};
-	if ($gameSystem._weatherSkipReLoad) {return false};
-	return true
+SpriteWeatherEX.prototype.refreshTilingMove = function(sprite) {
+	var w1 = Graphics.boxWidth;
+	var h1 = Graphics.boxHeight;
+	var w2 = (w1 * 130 / 100);
+	var h2 = (h1 * 130 / 100);
+	var w = w1 + w2 + 32;
+	var h = h1 + h2 + 32;
+	var x = (w2 / 3)
+	var y =	(h2 / 3)	
+	sprite.move(x, y,w,h);
+	sprite.refreshMove = true;
 };
 
 //==============================
@@ -1104,6 +846,29 @@ SpriteWeatherEX.prototype.setupBase = function(sprite,index) {
 	sprite._roll = 0;
 	sprite._wait = this.data().wait;
 	sprite._frames = [0,0,0,0,0];
+};
+
+//==============================
+// * set Cam Screen
+//==============================
+SpriteWeatherEX.prototype.setCamScreen = function() {
+	var camRange = $gameSystem._cam_data[1] / 100;
+	var center = [(Graphics.boxWidth / 2),(Graphics.boxHeight / 2)];	
+	this._cam[0] = Math.floor(center[0] * camRange);
+	this._cam[1] = Math.floor(center[1] * camRange);
+	this._cam[2] = true;
+	this._screenRX = Graphics.boxWidth + (this._cam[0] * 2);
+	this._screenRY = Graphics.boxHeight + (this._cam[1] * 2);	
+};
+
+//==============================
+// * set Frontal Camera
+//==============================
+SpriteWeatherEX.prototype.setFrontalCamera = function() {
+    this._cam[0] = Graphics.boxWidth * 50 / 100;
+	this._cam[1] = Graphics.boxHeight * 50 / 100;
+	this._cam[3] = Graphics.boxWidth / 2
+	this._cam[4] = Graphics.boxHeight / 2
 };
 
 //==============================
@@ -1135,17 +900,12 @@ SpriteWeatherEX.prototype.loadPreData = function(sprite,data) {
 	 sprite._id = data.idS;
 	 sprite.origin.x = data.originX;
 	 sprite.origin.y = data.originY;
-	 if (this.isTilingWeather()) {this.refreshTilingPos(sprite)};
+	 if (this.isTilingWeather()) {
+		 sprite.move(0, 0,Graphics.boxWidth + 32,Graphics.boxHeight + 32);
+		 sprite.x = -16 +(Graphics.boxWidth / 2);
+		 sprite.y = -16 + (Graphics.boxHeight / 2);
+	 };
 };		
-
-//==============================
-// * refreshTilingPos
-//==============================
-SpriteWeatherEX.prototype.refreshTilingPos = function(sprite) {
-     sprite.move(0, 0,Graphics.width + 32 + this._cam[7],Graphics.height + 32 + this._cam[8]);
-	 sprite.x = -16 + (Graphics.width / 2) - this._cam[0];
-	 sprite.y = -16 + (Graphics.height / 2) - this._cam[1];
-};
 
 //==============================
 // * screen Y
@@ -1184,28 +944,28 @@ SpriteWeatherEX.prototype.needFixScreenMode = function() {
 // * screen limit X1
 //==============================
 SpriteWeatherEX.prototype.screenLimitX1 = function(sprite) {
-	return -(sprite.width + this._cam[0] + 96 - this._cam[5]) ;
+	return -(sprite.width + this._cam[0] + 96);
 };
 
 //==============================
 // * screen limit X2
 //==============================
 SpriteWeatherEX.prototype.screenLimitX2= function(sprite) {
-	return (this._screenRX + sprite.width + this._cam[0] + 96) - this._cam[7];
+	return this._screenRX + sprite.width + this._cam[0] + 96;
 };
 
 //==============================
 // * screen limit Y1
 //==============================
 SpriteWeatherEX.prototype.screenLimitY1 = function(sprite) {
-	return -(sprite.height + this._cam[1] + 96 - this._cam[6]);
+	return -(sprite.height + this._cam[1] + 96);
 };
 
 //==============================
 // * screen limit Y2
 //==============================
 SpriteWeatherEX.prototype.screenLimitY2 = function(sprite) {
-	return (this._screenRY + sprite.height + this._cam[1] + 96) - this._cam[8];
+	return this._screenRY + sprite.height + this._cam[1] + 96;
 };
 
 //==============================
@@ -1275,14 +1035,14 @@ SpriteWeatherEX.prototype.randomRefreshLeft = function() {
 // * random Pos Y2
 //==============================
 SpriteWeatherEX.prototype.randomPosY2 = function(sprite) {
-    sprite._realY = -this._cam[1] + Math.randomInt(this.screenY() + this._screenRY + this._cam[1]);
+    sprite._realY = -this._cam[1]  + Math.randomInt(this.screenY() + this._screenRY + this._cam[1]);
 };
 
 //==============================
 // * upper Pos
 //==============================
 SpriteWeatherEX.prototype.upperPos = function(sprite,range) {
-	var rg = this._cam[1] ? this._cam[1] : range;
+	var rg = this._cam[0] ? this._cam[0] : range;
 	this.randomPosX(sprite);
     sprite._realY = -rg + this.screenY();
 };
@@ -1612,7 +1372,6 @@ SpriteWeatherEX.prototype.needInitialRandomPos = function() {
 // * refresh Weather
 //==============================
 SpriteWeatherEX.prototype.refreshWeather = function(sprite,initial) {
-	if ($gameParty.inBattle()) {this.setCamOffset(sprite)	};	
 	switch (this.mode()) {
     case 0:
         this.setupWind1(sprite);
@@ -1728,24 +1487,16 @@ SpriteWeatherEX.prototype.refreshWeather = function(sprite,initial) {
 
     };
 	if (initial) {
+		if ($gameParty.inBattle()) {
+		    if (Imported.MOG_BattleCameraFrontal) {this.setFrontalCamera()};
+			if (Imported.MOG_BattleCamera) {this.setCamScreen()};  
+		};
 		sprite._ani[6] = 5;
 		if (this.needInitialRandomPos()) {this.setPosRandom(sprite)};
 		this.updateEffects(sprite)
 	} else {
 		if (sprite._ani[6] > 0) {sprite._ani[7] = Math.randomInt(120)};
 	};	
-};
-
-//==============================
-// * set Cam Offset
-//==============================
-SpriteWeatherEX.prototype.setCamOffset = function(sprite) {
-    var x = Graphics.width / 3;
-	var x2 = Graphics.width / 3;
-	var y = Graphics.height / 3;
-	var y2 = Graphics.height / 2;
-    this._cam = [x,y,false,0,0,0,0,x2,y2];
-	if (this.isTilingWeather()) {this.refreshTilingPos(sprite)};
 };
 
 //==============================
@@ -1930,7 +1681,6 @@ SpriteWeatherEX.prototype.setupWind1 = function(sprite) {
      sprite._sx = (this._speed + 1.5 + Math.random() * 3);    
      sprite._sy = (this._speed + 1.0 + Math.random() * 3);
 	 sprite._roll = Math.randomInt(60);
-
 };
 
 //==============================
@@ -2745,9 +2495,9 @@ SpriteWeatherEX.prototype.updateScroll = function(sprite) {
 SpriteWeatherEX.prototype.setupParallax1 = function(sprite,initial) {
    sprite._sx = 1  * this.speed() / 100;
    sprite._sy = 1  * this.speed() / 100;
-   sprite.move(0, 0,Graphics.width + 32,Graphics.height + 32);
-   sprite.x = -16 +(Graphics.width / 2);
-   sprite.y = -16 + (Graphics.height / 2);
+   sprite.move(0, 0,Graphics.boxWidth + 32,Graphics.boxHeight + 32);
+   sprite.x = -16 +(Graphics.boxWidth / 2);
+   sprite.y = -16 + (Graphics.boxHeight / 2);
 };
 
 //==============================
@@ -3098,6 +2848,8 @@ SpriteWeatherEX.prototype.update = function() {
 	};
 	if (!this._camCheck &&  $gameParty.inBattle()) {
 		this._camCheck = true;
+		if (Imported.MOG_BattleCameraFrontal) {this.setFrontalCamera()};
+		if (Imported.MOG_BattleCamera) {this.setCamScreen()};  
 		for (var i = 0; i < this._sprites.length; i++) {
 		    this.refreshWeather(this._sprites[i],true);
 		};
@@ -3120,6 +2872,7 @@ SpriteWeatherEX.prototype.updateSprites = function(sprite) {
 		 return;
 	 };
 	 sprite.visible = true;
+	 if (Imported.MOG_BattleCameraFrontal && !sprite.refreshMove && $gameParty.inBattle()) {this.refreshTilingMove(sprite)};
      this.updateEffects(sprite)
      if (this.needUpdatePosition()) {this.updatePosition(sprite)};
  	 this.updateOther(sprite);

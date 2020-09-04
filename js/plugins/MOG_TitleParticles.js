@@ -3,10 +3,8 @@
 //=============================================================================
 
 /*:
- * @target MZ
- * @plugindesc (v1.0) Adiciona partículas na tela de título.
+ * @plugindesc (v2.1 *) Adiciona partículas na tela de título.
  * @author Moghunter
- * @url https://atelierrgss.wordpress.com 
  * 
  * @param -> Particles 1 <<<<<<<<<<<<<<<<<<<<<<<
  * @desc
@@ -25,6 +23,11 @@
  * @param P1 Amount
  * @desc Quantidade de partículas.
  * @default 25
+ * @parent -> Particles 1 <<<<<<<<<<<<<<<<<<<<<<<
+ *
+ * @param P1 Z Index
+ * @desc Prioridade Z do sprite.
+ * @default 20
  * @parent -> Particles 1 <<<<<<<<<<<<<<<<<<<<<<<
  * 
  * @param P1 X Speed
@@ -70,6 +73,8 @@
  * @default 0
  * @parent -> Particles 1 <<<<<<<<<<<<<<<<<<<<<<<
  *
+ * @param
+ * 
  * @param -> Particles 2 <<<<<<<<<<<<<<<<<<<<<<<
  * @desc
  * 
@@ -87,6 +92,11 @@
  * @param P2 Amount
  * @desc Quantidade de partículas.
  * @default 5
+ * @parent -> Particles 2 <<<<<<<<<<<<<<<<<<<<<<<
+ *
+ * @param P2 Z Index
+ * @desc Prioridade Z do sprite.
+ * @default 21
  * @parent -> Particles 2 <<<<<<<<<<<<<<<<<<<<<<<
  *  
  * @param P2 X Speed
@@ -131,6 +141,8 @@
  * @desc Tempo para apresentar a imagem.
  * @default 0
  * @parent -> Particles 2 <<<<<<<<<<<<<<<<<<<<<<<
+ *
+ * @param
  * 
  * @param -> Particles 3 <<<<<<<<<<<<<<<<<<<<<<<
  * @desc
@@ -149,6 +161,11 @@
  * @param P3 Amount
  * @desc Quantidade de partículas.
  * @default 5
+ * @parent -> Particles 3 <<<<<<<<<<<<<<<<<<<<<<<
+ *
+ * @param P3 Z Index
+ * @desc Prioridade Z do sprite.
+ * @default 22
  * @parent -> Particles 3 <<<<<<<<<<<<<<<<<<<<<<<
  * 
  * @param P3 X Speed
@@ -193,6 +210,8 @@
  * @desc Tempo para apresentar a imagem.
  * @default 0
  * @parent -> Particles 3 <<<<<<<<<<<<<<<<<<<<<<<
+ *
+ * @param
  * 
  * @param -> Particles 4 <<<<<<<<<<<<<<<<<<<<<<<
  * @desc
@@ -211,6 +230,11 @@
  * @param P4 Amount
  * @desc Quantidade de partículas.
  * @default 25
+ * @parent -> Particles 4 <<<<<<<<<<<<<<<<<<<<<<<
+ *
+ * @param P4 Z Index
+ * @desc Prioridade Z do sprite.
+ * @default 23
  * @parent -> Particles 4 <<<<<<<<<<<<<<<<<<<<<<<
  * 
  * @param P4 X Speed
@@ -255,6 +279,8 @@
  * @desc Tempo para apresentar a imagem.
  * @default 0
  * @parent -> Particles 4 <<<<<<<<<<<<<<<<<<<<<<<
+ *
+ * @param
  * 
  * @param -> Particles 5 <<<<<<<<<<<<<<<<<<<<<<<
  * @desc
@@ -273,6 +299,11 @@
  * @param P5 Amount
  * @desc Quantidade de partículas.
  * @default 25
+ * @parent -> Particles 5 <<<<<<<<<<<<<<<<<<<<<<<
+ *
+ * @param P5 Z Index
+ * @desc Prioridade Z do sprite.
+ * @default 24
  * @parent -> Particles 5 <<<<<<<<<<<<<<<<<<<<<<<
  * 
  * @param P5 X Speed
@@ -317,6 +348,8 @@
  * @desc Tempo para apresentar a imagem.
  * @default 0
  * @parent -> Particles 5 <<<<<<<<<<<<<<<<<<<<<<<
+ *
+ * @param
  * 
  * @param -> Particles 6 <<<<<<<<<<<<<<<<<<<<<<<
  * @desc
@@ -334,6 +367,11 @@
  *
  * @param P6 Amount
  * @desc Quantidade de partículas.
+ * @default 25
+ * @parent -> Particles 6 <<<<<<<<<<<<<<<<<<<<<<<
+ *
+ * @param P6 Z Index
+ * @desc Prioridade Z do sprite.
  * @default 25
  * @parent -> Particles 6 <<<<<<<<<<<<<<<<<<<<<<<
  * 
@@ -382,7 +420,7 @@
  *
  * @help  
  * =============================================================================
- * +++ MOG - Title Particles (v1.0) +++
+ * +++ MOG - Title Particles (v2.1) +++
  * By Moghunter 
  * https://atelierrgss.wordpress.com/
  * =============================================================================
@@ -392,13 +430,17 @@
  *
  * img/titles2/
  *
+ * ============================================================================
+ * - WHAT'S  NEW (version 2.1) 
+ * ============================================================================
+ * - (NEW) - Plugins parameters compatíveis com RM1.5+
  */
 
 //=============================================================================
 // ** PLUGIN PARAMETERS
 //=============================================================================
-    var Imported = Imported || {};
-    Imported.MOG_Title_Particles = true;
+　　var Imported = Imported || {};
+　　Imported.MOG_Title_Particles = true;
 　　var Moghunter = Moghunter || {}; 
 
   　Moghunter.parameters = PluginManager.parameters('MOG_TitleParticles');
@@ -408,6 +450,7 @@
 	Moghunter.tparticles_Y = [];	Moghunter.tparticles_R = [];
 	Moghunter.tparticles_B = [];	Moghunter.tparticles_A = [];
 	Moghunter.tparticles_L = [];
+	Moghunter.tparticles_Z = [];
 	Moghunter.tparticles_T = [];
 	for (var i = 0; i < Moghunter.tparticles_M; i++) {
 		Moghunter.tparticles_V[i]  = String(Moghunter.parameters['P' + String(i + 1) + " Visible"] || "true");
@@ -415,68 +458,68 @@
 		Moghunter.tparticles_N[i]  = Number(Moghunter.parameters['P' + String(i + 1) + " Amount"] || 25);
 		Moghunter.tparticles_X[i]  = Number(Moghunter.parameters['P' + String(i + 1) + " X Speed"] || 0);
 		Moghunter.tparticles_Y[i]  = Number(Moghunter.parameters['P' + String(i + 1) + " Y Speed"] || -1);
+		Moghunter.tparticles_Z[i]  = Number(Moghunter.parameters['P' + String(i + 1) + " Z Index"] || 20);
 		Moghunter.tparticles_R[i]  = Number(Moghunter.parameters['P' + String(i + 1) + " Rotation Speed"] || 0.02);
 		Moghunter.tparticles_B[i]  = Number(Moghunter.parameters['P' + String(i + 1) + " Blend Mode"] || 1);
 		Moghunter.tparticles_A[i]  = Number(Moghunter.parameters['P' + String(i + 1) + " Anchor"] || 0);
 		Moghunter.tparticles_L[i]  = String(Moghunter.parameters['P' + String(i + 1) + " Leaf Mode"] || "false");
 		Moghunter.tparticles_T[i]  = Number(Moghunter.parameters['P' + String(i + 1) + " Transition Time"] || 60);
 	};
-
+	
 //=============================================================================
-// ■ Scene Title ■
+// ** Scene Title
 //=============================================================================	
-
+		
 //==============================
-// ♦ ALIAS ♦  Create Foreground
+// * Create
 //==============================
-var _mogMZ_titleParticles_createForeground = Scene_Title.prototype.createForeground;
-Scene_Title.prototype.createForeground = function() {
-	if (!this._titleField2) {this.createTitleField2()};
-	this.createTitleParticles();	
-	_mogMZ_titleParticles_createForeground.call(this);
-};
-
-//==============================
-// ♦ ALIAS ♦  Create
-//==============================
-var _mogMZ_titleParticles_create = Scene_Title.prototype.create;
+var _mog_titleparticles_create = Scene_Title.prototype.create;
 Scene_Title.prototype.create = function() {
-	_mogMZ_titleParticles_create.call(this);
-	if (this._titleField2) {this._titleField2.children.sort(function(a, b){return a.z-b.z})};
+	_mog_titleparticles_create.call(this);
+	if (this._titleField) {this._titleField.children.sort(function(a, b){return a.zIndex-b.zIndex})}
+};		
+		
+//==============================
+// * Create Background
+//==============================
+var _mog_title_particles_createBackground = Scene_Title.prototype.createBackground;
+Scene_Title.prototype.createBackground = function() {
+    _mog_title_particles_createBackground.call(this);
+	if (!this._titleField) {this.createTitleField()};
 };
 
 //==============================
-// ♦ ALIAS ♦   Update
+// * Create Title Field
 //==============================
-var _mogMZ_titleParticles_update = Scene_Title.prototype.update;
-Scene_Title.prototype.update = function() {
-    _mogMZ_titleParticles_update.call(this);
-    if (this._particles) {this.updateTitleParticles()};
+Scene_Title.prototype.createTitleField = function() {
+    this._titleField = new Sprite();
+	this.addChild(this._titleField);
 };
-
+  
 //==============================
-// * Create Title Field 2
+// * Create Background
 //==============================
-Scene_Title.prototype.createTitleField2 = function() {
-    this._titleField2 = new Sprite();
-	this._titleField2.z = 100;
-    this.addChild(this._titleField2);
-};
-
+var _mog_titleparticles_createForeground = Scene_Title.prototype.createForeground;
+Scene_Title.prototype.createForeground = function() {
+	this.createParticles();
+    _mog_titleparticles_createForeground.call(this);
+};  
+  
 //==============================
-// * Create Title Particles
+// * Create Particles
 //==============================
-Scene_Title.prototype.createTitleParticles = function() {
- 	this._tparticles = []
+Scene_Title.prototype.createParticles = function() {	
+    if (!this._titleField) {this.createTitleField()};
+	this._tparticles = []
     for (var i = 0; i < Moghunter.tparticles_M; i++) {
-       this._tparticles[i] = new TitleParticles(i);
-	   this._tparticles[i].z = 100 + i;
-	   this._titleField2.addChild(this._tparticles[i]);
-    };   
+      this._tparticles[i] = new TitleParticles(i);
+	  this._tparticles[i].zIndex = Moghunter.tparticles_Z[i];
+	  this._titleField.addChild(this._tparticles[i]);
+    };
 };
-
+    
 //=============================================================================
-// ■ Title Particles ■
+// ** Title Particles
 //=============================================================================
 function TitleParticles() {
     this.initialize.apply(this, arguments);
@@ -557,9 +600,8 @@ TitleParticles.prototype.refreshParticles = function(sprite) {
 	 sprite.scale = new PIXI.Point(0.5 + Number(pz), 0.5 + Number(pz));
 	 sprite.lef[1] = 0;	
 	 sprite.lef[2] = sprite.scale.x;
-
 	 sprite.lef[3] = 120 + Math.randomInt(180);
-	 sprite.opacity = 255;
+	 sprite.opacity = 0;
 	 this.setPosition(sprite);
 };
 
@@ -579,9 +621,9 @@ TitleParticles.prototype.setPosition = function(sprite) {
 // * set Start Position
 //==============================
 TitleParticles.prototype.setStartPosition = function(sprite) {
-	var r = Math.randomInt(Graphics.width + this._img._cw2);
+	var r = Math.randomInt(Graphics.boxWidth + this._img._cw2);
 	sprite.x = -this._img._cw + r;
-	var r = Math.randomInt(Graphics.height + this._img._ch2);
+	var r = Math.randomInt(Graphics.boxHeight + this._img._ch2);
 	sprite.y = -this._img._ch + r;
 	sprite.int = false;	
 };
@@ -591,13 +633,13 @@ TitleParticles.prototype.setStartPosition = function(sprite) {
 //==============================
 TitleParticles.prototype.setPositionX = function(sprite) {
     if (sprite.sx[1] > 0) {
-		var r = Math.randomInt(Graphics.width - this.lx1(sprite));
+		var r = Math.randomInt(Graphics.boxWidth - this.lx1(sprite));
 		sprite.x = this.lx1(sprite) + r;			 
 	} else if (sprite.sx[1] < 0) {
-		var r = Math.randomInt(Graphics.width - this.lx1(sprite));
+		var r = Math.randomInt(Graphics.boxWidth - this.lx1(sprite));
 		sprite.x = -this.lx1(sprite) + r;
 	} else {
-		var r = Math.randomInt(Graphics.width + this._img._cw * 2);
+		var r = Math.randomInt(Graphics.boxWidth + this._img._cw * 2);
 		sprite.x = -this._img._cw + r;			
 	};
 };
@@ -611,7 +653,7 @@ TitleParticles.prototype.setPositionY = function(sprite) {
 	} else if (sprite.sy[1] < 0) {
 		 sprite.y = this.ly2();
 	} else {
-		var r = Math.randomInt(Graphics.height + this._img._ch * 2);
+		var r = Math.randomInt(Graphics.boxHeight + this._img._ch * 2);
 		sprite.y = -this._img._ch + r;
 	};
 };
@@ -620,7 +662,7 @@ TitleParticles.prototype.setPositionY = function(sprite) {
 // * lx1 
 //==============================
 TitleParticles.prototype.lx1 = function(sprite) {
-   if (sprite.sx[1] > 0) {return -Graphics.width / 2;
+   if (sprite.sx[1] > 0) {return -Graphics.boxWidth / 2;
    } else {return -this._img._cw2};
 };
 
@@ -628,8 +670,8 @@ TitleParticles.prototype.lx1 = function(sprite) {
 // * lx2 
 //==============================
 TitleParticles.prototype.lx2 = function(sprite) {
-    if (sprite.sx[1] > 0) {return Graphics.width + this._img._cw2;
-	} else {return Graphics.width + Graphics.width / 2};
+    if (sprite.sx[1] > 0) {return Graphics.boxWidth + this._img._cw2;
+	} else {return Graphics.boxWidth + Graphics.boxWidth / 2};
 };
 
 //==============================
@@ -643,7 +685,7 @@ TitleParticles.prototype.ly1 = function(sprite) {
 // * ly2 
 //==============================
 TitleParticles.prototype.ly2 = function(sprite) {
-	return Graphics.height + this._img._ch2
+	return Graphics.boxHeight + this._img._ch2
 };
 
 //==============================
@@ -688,6 +730,7 @@ TitleParticles.prototype.updateParticles = function() {
 	 if (this._img.isReady() && !this._start) {this.getData()};
 	 if (!this._start) {return};
 	 if (!this._spriteP) {return};
+	 if (this._t > 0) {this._t--; return};
 	 for (var i = 0; i < this._spriteP.length; i++) {
 		  this.updateMove(this._spriteP[i]);
 		  if (this.needRefresh(this._spriteP[i])) {this.refreshParticles(this._spriteP[i])};
@@ -698,6 +741,6 @@ TitleParticles.prototype.updateParticles = function() {
 // * Update
 //==============================
 TitleParticles.prototype.update = function() {
-	Sprite.prototype.update.call(this);
-	if (this._enabled) {this.updateParticles()};
+    Sprite.prototype.update.call(this);
+    if (this._enabled) {this.updateParticles()};
 };	

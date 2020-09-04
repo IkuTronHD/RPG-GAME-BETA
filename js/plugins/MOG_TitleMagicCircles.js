@@ -3,10 +3,8 @@
 //=============================================================================
 
 /*:
- * @target MZ
- * @plugindesc (v1.0) Adiciona círculos mágicos na tela de título.
+ * @plugindesc (v1.1 *) Adiciona círculos mágicos na tela de título.
  * @author Moghunter
- * @url https://atelierrgss.wordpress.com 
  * 
  * @param -> Magic Circle 1 <<<<<<<<<<<<<<<<<<<<<<<
  * @desc
@@ -29,12 +27,12 @@
  * 
  * @param Circle 1 X-Axis
  * @desc Posição X-Axis da imagem.
- * @default 680
+ * @default 790
  * @parent -> Magic Circle 1 <<<<<<<<<<<<<<<<<<<<<<<
  * 
  * @param Circle 1 Y-Axis
  * @desc Posição Y-Axis da imagem.
- * @default 200
+ * @default 600
  * @parent -> Magic Circle 1 <<<<<<<<<<<<<<<<<<<<<<<
  * 
  * @param Circle 1 Rotation
@@ -45,7 +43,7 @@
  * @param Circle 1 Blend Mode
  * @desc Definição de blend. 
  * 0 - Normal    1- Add    2 - Substract
- * @default 0
+ * @default 1
  * @type select
  * @option Normal
  * @value 0
@@ -63,7 +61,7 @@
  * @param Circle 1 Pulse Mode
  * @desc Ativar animação de pulse.
  * 0 - Disabled   1 - Zoom In Out  2 - Zoom Out
- * @default 0
+ * @default 2
  * @type select
  * @option Disabled
  * @value 0
@@ -72,13 +70,15 @@
  * @option Zoom Out
  * @value 2 
  * @parent -> Magic Circle 1 <<<<<<<<<<<<<<<<<<<<<<< 
+ *
+ * @param
  * 
  * @param -> Magic Circle 2 <<<<<<<<<<<<<<<<<<<<<<<
  * @desc
  * 
  * @param Circle 2 Visible
  * @desc Ativar a imagem.
- * @default false
+ * @default true
  * @type boolean
  * @parent -> Magic Circle 2 <<<<<<<<<<<<<<<<<<<<<<<
  *  
@@ -94,12 +94,12 @@
  * 
  * @param Circle 2 X-Axis
  * @desc Posição X-Axis da imagem.
- * @default 200
+ * @default 790
  * @parent -> Magic Circle 2 <<<<<<<<<<<<<<<<<<<<<<<
  * 
  * @param Circle 2 Y-Axis
  * @desc Posição Y-Axis da imagem.
- * @default 200
+ * @default 600
  * @parent -> Magic Circle 2 <<<<<<<<<<<<<<<<<<<<<<<
  * 
  * @param Circle 2 Rotation
@@ -110,7 +110,7 @@
  * @param Circle 2 Blend Mode
  * @desc Definição de blend. 
  * 0 - Normal    1- Add    2 - Substract
- * @default 1
+ * @default 0
  * @type select
  * @option Normal
  * @value 0
@@ -128,7 +128,7 @@
  * @param Circle 2 Pulse Mode
  * @desc Ativar animação de pulse.
  * 0 - Disabled   1 - Zoom In Out  2 - Zoom Out
- * @default 2
+ * @default 0
  * @type select
  * @option Disabled
  * @value 0
@@ -137,6 +137,8 @@
  * @option Zoom Out
  * @value 2 
  * @parent -> Magic Circle 2 <<<<<<<<<<<<<<<<<<<<<<<
+ *
+ * @param
  * 
  * @param -> Magic Circle 3 <<<<<<<<<<<<<<<<<<<<<<<
  * @desc
@@ -202,6 +204,8 @@
  * @option Zoom Out
  * @value 2 
  * @parent -> Magic Circle 3 <<<<<<<<<<<<<<<<<<<<<<<
+ *
+ * @param
  * 
  * @param -> Magic Circle 4 <<<<<<<<<<<<<<<<<<<<<<<
  * @desc
@@ -267,6 +271,8 @@
  * @option Zoom Out
  * @value 2 
  * @parent -> Magic Circle 4 <<<<<<<<<<<<<<<<<<<<<<<
+ *
+ * @param
  * 
  * @param -> Magic Circle 5 <<<<<<<<<<<<<<<<<<<<<<<
  * @desc
@@ -332,6 +338,8 @@
  * @option Zoom Out
  * @value 2 
  * @parent -> Magic Circle 5 <<<<<<<<<<<<<<<<<<<<<<<
+ *
+ * @param
  * 
  * @param -> Magic Circle 6 <<<<<<<<<<<<<<<<<<<<<<<
  * @desc
@@ -397,6 +405,8 @@
  * @option Zoom Out
  * @value 2 
  * @parent -> Magic Circle 6 <<<<<<<<<<<<<<<<<<<<<<< 
+ *
+ * @param
  * 
  * @param -> Magic Circle 7 <<<<<<<<<<<<<<<<<<<<<<<
  * @desc
@@ -462,6 +472,8 @@
  * @option Zoom Out
  * @value 2 
  * @parent -> Magic Circle 7 <<<<<<<<<<<<<<<<<<<<<<<  
+ *
+ * @param
  * 
  * @param -> Magic Circle 8 <<<<<<<<<<<<<<<<<<<<<<<
  * @desc
@@ -527,6 +539,8 @@
  * @option Zoom Out
  * @value 2 
  * @parent -> Magic Circle 8 <<<<<<<<<<<<<<<<<<<<<<<
+ *
+ * @param
  * 
  * @param -> Magic Circle 9 <<<<<<<<<<<<<<<<<<<<<<<
  * @desc
@@ -592,6 +606,8 @@
  * @option Zoom Out
  * @value 2 
  * @parent -> Magic Circle 9 <<<<<<<<<<<<<<<<<<<<<<<
+ *
+ * @param
  * 
  * @param -> Magic Circle 10 <<<<<<<<<<<<<<<<<<<<<<<
  * @desc
@@ -670,13 +686,17 @@
  *
  * img/titles2/
  *
+ * ============================================================================
+ * - WHAT'S  NEW (version 1.1) 
+ * ============================================================================
+ * - (NEW) - Plugins parameters compatíveis com RM1.5+
  */
 
 //=============================================================================
 // ** PLUGIN PARAMETERS
 //=============================================================================
-    var Imported = Imported || {};
-    Imported.MOG_TitleMagicCircles = true;
+　　var Imported = Imported || {};
+　　Imported.MOG_TitleMagicCircles = true;
 　　var Moghunter = Moghunter || {}; 
 
   　Moghunter.parameters = PluginManager.parameters('MOG_TitleMagicCircles');
@@ -699,51 +719,59 @@
 	};	
 	
 //=============================================================================
-// ■ Scene Title  ■ 
+// ** Scene Title
 //=============================================================================	
 		
 //==============================
-// ♦ ALIAS ♦  Create
+// * Create
 //==============================
 var _mog_mcirclestitles_create = Scene_Title.prototype.create;
 Scene_Title.prototype.create = function() {
 	_mog_mcirclestitles_create.call(this);
-	if (this._titleField2) {this._titleField2.children.sort(function(a, b){return a.z-b.z})}
-};	
+	if (this._titleField) {this._titleField.children.sort(function(a, b){return a.zIndex-b.zIndex})}
+};			
 		
 //==============================
-// ♦ ALIAS ♦  Create Foreground
+// * Create Background
+//==============================
+var _mog_mcirclestitles_createBackground = Scene_Title.prototype.createBackground;
+Scene_Title.prototype.createBackground = function() {
+    _mog_mcirclestitles_createBackground.call(this);
+	if (!this._titleField) {this.createTitleField()};
+};
+  
+//==============================
+// * Create Title Field
+//==============================
+Scene_Title.prototype.createTitleField = function() {
+    this._titleField = new Sprite();
+	this.addChild(this._titleField);
+};  
+  
+//==============================
+// * Create Background
 //==============================
 var _mog_mcirclestitles_createForeground = Scene_Title.prototype.createForeground;
 Scene_Title.prototype.createForeground = function() {
-	if (!this._titleField2) {this.createTitleField2()};
 	this.createMcircles();
-	_mog_mcirclestitles_createForeground.call(this);
-};		
-		
-//==============================
-// * Create Title Field 2
-//==============================
-Scene_Title.prototype.createTitleField2 = function() {
-    this._titleField2 = new Sprite();
-	this._titleField2.z = 100;
-    this.addChild(this._titleField2);
+    _mog_mcirclestitles_createForeground.call(this);
 };
     
 //==============================
 // * Create M Circles
 //==============================
 Scene_Title.prototype.createMcircles = function() {
+	if (!this._titleField) {this.createTitleField()};
 	this._mcircles = [];	
     for (var i = 0; i < Moghunter.titleMcircles_M; i++) {
-        this._mcircles[i] = new TitleMCircles(i);
-	    this._mcircles[i].zIndex = Moghunter.titleMcircles_Z[i];
-	    this._titleField2.addChild(this._mcircles[i]);
+      this._mcircles[i] = new TitleMCircles(i);
+	  this._mcircles[i].zIndex = Moghunter.titleMcircles_Z[i];
+	  this._titleField.addChild(this._mcircles[i]);
     };
 };
   
 //=============================================================================
-// ■ Title Magic Circle  ■ 
+// ** Title Magic Circle
 //=============================================================================
 function TitleMCircles() {
     this.initialize.apply(this, arguments);
@@ -758,7 +786,7 @@ TitleMCircles.prototype.constructor = TitleMCircles;
 TitleMCircles.prototype.initialize = function(index) {
     Sprite.prototype.initialize.call(this);
 	this._index = index;
-	this._enabled = String(Moghunter.titleMcircles_V[this._index]) == "true" ? true : false;
+	this._enabled = String(Moghunter.titleMcircles_V[this._index]) === "true" ? true : false;
     if (this._enabled) {this.create_mcircles()};
 };
   
@@ -769,10 +797,8 @@ TitleMCircles.prototype.create_mcircles = function() {
 	this.bitmap = ImageManager.loadTitle2(String(Moghunter.titleMcircles_N[this._index]));
 	this.anchor.x = 0.5;
 	this.anchor.y = 0.5;
-	var fx = (Graphics.width - 816) / 2; 
-	var fy = (Graphics.height - 624) / 2;		
-	this.x = Number(Moghunter.titleMcircles_X[this._index]) + fx;
-	this.y = Number(Moghunter.titleMcircles_Y[this._index]) + fy;
+	this.x = Number(Moghunter.titleMcircles_X[this._index]);
+	this.y = Number(Moghunter.titleMcircles_Y[this._index]);
 	this.r = Number(Moghunter.titleMcircles_R[this._index]);
 	this.t = Number(Moghunter.titleMcircles_T[this._index]);
 	this.p = [Number(Moghunter.titleMcircles_P[this._index]),0,0];
@@ -830,7 +856,11 @@ TitleMCircles.prototype.updateMcirclePulseM2 = function() {
 //==============================
 TitleMCircles.prototype.update_magic_circle = function() {
 	this.rotation += this.r;
+	if (this.t > 0) {
+		this.t--;
+	} else {
 	if (this.p[0] < 2) {this.opacity += 2};
+	};
 	if (this.p[0] > 0) {this.updateMcirclePulse()};
 };    
   
